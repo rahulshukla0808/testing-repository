@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  cronscheduler.app:
+    image: ${DOCKER_REGISTRY}cronschedulewebapp
+    build:
+      context: .
+      dockerfile: src/CronSchedulerApp/Dockerfile
+      args:
+        RUNTESTS: "false"
+        VERBOSE: "false"
+        #NUGET_RESTORE: "-f" #overides the --disable-parallel
+        PROJECT_PATH: "/src/CronSchedulerApp/CronSchedulerApp.csproj"
+        SOLUTION_BASE: "false"
+
+  cronscheduler.sql:
+    image: microsoft/mssql-server-linux:2017-latest
